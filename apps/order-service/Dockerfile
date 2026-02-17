@@ -21,7 +21,11 @@ FROM node:20-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 COPY --from=deps /app/node_modules ./node_modules
-COPY --from=build /app/apps/order-service/dist ./dist
-COPY --from=build /app/apps/order-service/package.json ./package.json
+COPY --from=deps /app/apps/order-service/node_modules ./apps/order-service/node_modules
+COPY --from=build /app/packages/shared/package.json ./packages/shared/package.json
+COPY --from=build /app/packages/shared/dist ./packages/shared/dist
+COPY --from=build /app/apps/order-service/dist ./apps/order-service/dist
+COPY --from=build /app/apps/order-service/package.json ./apps/order-service/package.json
 EXPOSE 4002
-CMD ["node", "dist/main.js"]
+CMD ["node", "apps/order-service/dist/main.js"]
+

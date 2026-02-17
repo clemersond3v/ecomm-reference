@@ -19,7 +19,7 @@ export class ProductsResolver {
     if (limit) qs.set('limit', String(limit));
     const url = `${this.catalogBaseUrl}/products?${qs.toString()}`;
     const res = await httpJson<CatalogListResponse>(url);
-    return { items: res.items, nextCursor: res.nextCursor };
+    return { items: res.items, nextCursor: res.nextCursor ?? null };
   }
 
   @Query(() => Product, { nullable: true })

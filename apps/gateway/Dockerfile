@@ -21,7 +21,11 @@ FROM node:20-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 COPY --from=deps /app/node_modules ./node_modules
-COPY --from=build /app/apps/gateway/dist ./dist
-COPY --from=build /app/apps/gateway/package.json ./package.json
+COPY --from=deps /app/apps/gateway/node_modules ./apps/gateway/node_modules
+COPY --from=build /app/packages/shared/package.json ./packages/shared/package.json
+COPY --from=build /app/packages/shared/dist ./packages/shared/dist
+COPY --from=build /app/apps/gateway/package.json ./apps/gateway/package.json
+COPY --from=build /app/apps/gateway/dist ./apps/gateway/dist
 EXPOSE 4000
-CMD ["node", "dist/main.js"]
+CMD ["node", "apps/gateway/dist/main.js"]
+

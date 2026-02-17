@@ -21,8 +21,11 @@ export class Product {
 
 @ObjectType()
 export class ProductConnection {
-  @Field(() => [Product]) items!: Product[];
-  @Field({ nullable: true }) nextCursor?: string | null;
+  @Field(() => [Product])
+  items!: Product[];
+
+  @Field(() => String, { nullable: true })
+  nextCursor!: string | null;
 }
 
 @ObjectType()
@@ -42,9 +45,9 @@ export class Order {
   @Field(() => ID) orderId!: string;
   @Field(() => OrderStatus) status!: OrderStatus;
   @Field(() => [OrderItem]) items!: OrderItem[];
-  @Field({ nullable: true }) reservationId?: string | null;
-  @Field({ nullable: true }) paymentId?: string | null;
-  @Field({ nullable: true }) createdAt?: string | null;
+  @Field(() => String, { nullable: true }) reservationId!: string | null;
+  @Field(() => String, { nullable: true }) paymentId!: string | null;
+  @Field(() => String, { nullable: true }) createdAt!: string | null;
 }
 
 @InputType()

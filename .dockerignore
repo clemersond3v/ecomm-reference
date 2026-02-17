@@ -1,0 +1,15 @@
+# deps
+**/node_modules
+.pnpm-store
+.pnpm-debug.log
+
+# build outputs
+**/dist
+**/.next
+**/coverage
+
+# misc
+.git
+.DS_Store
+.env
+.env.*
